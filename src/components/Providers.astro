@@ -1,0 +1,59 @@
+---
+// Providers section - 7 provider cards
+const providers = [
+  {
+    name: "provideAccounts",
+    description: "Injects full account data -- balances, voting power, profile metadata.",
+    icon: `<circle cx="12" cy="7" r="4"/><path d="M5.5 21a6.5 6.5 0 0113 0"/>`,
+  },
+  {
+    name: "provideRcAccounts",
+    description: "Injects Resource Credit data -- current RC, max RC, regeneration.",
+    icon: `<rect x="1" y="6" width="18" height="12" rx="2"/><line x1="22" y1="10" x2="22" y2="14"/><rect x="4" y="9" width="8" height="6" fill="rgba(245,158,11,0.2)" stroke="none"/>`,
+  },
+  {
+    name: "provideManabarData",
+    description: "Injects manabar percentage and regeneration timeline.",
+    icon: `<path d="M12 2a10 10 0 110 20 10 10 0 010-20z"/><path d="M12 6v6l4 2"/>`,
+  },
+  {
+    name: "provideWitnesses",
+    description: "Injects witness data -- signing key, feed price, missed blocks.",
+    icon: `<rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><circle cx="6" cy="6" r="1" fill="#F59E0B"/><circle cx="6" cy="18" r="1" fill="#F59E0B"/>`,
+  },
+  {
+    name: "provideBlockData",
+    description: "Injects full block data including all transactions and operations.",
+    icon: `<path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/>`,
+  },
+  {
+    name: "provideBlockHeaderData",
+    description: "Injects block header -- witness, timestamp, merkle root.",
+    icon: `<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="8" y1="13" x2="16" y2="13"/><line x1="8" y1="17" x2="16" y2="17"/>`,
+  },
+  {
+    name: "provideFeedPriceData",
+    description: "Injects current median price feed and market data.",
+    icon: `<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>`,
+  },
+];
+---
+
+<section id="providers" aria-labelledby="providers-title" class="mx-auto max-w-[1200px] px-6 py-32">
+  <div class="reveal mb-16 text-center">
+    <h2 id="providers-title" class="text-h1 mb-4 font-bold tracking-tight text-text-primary" style="letter-spacing: -0.02em;">Enrich Events with Data Providers</h2>
+    <p class="mx-auto max-w-[600px] text-lg leading-relaxed text-text-secondary">Chain providers onto any filter to automatically inject account data, block info, and market prices.</p>
+  </div>
+
+  <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+    {providers.map((provider, i) => (
+      <div class="reveal card-hover rounded-2xl border border-border-default bg-bg-surface p-6" style={`transition-delay: calc(${i} * 40ms);`}>
+        <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-muted">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" set:html={provider.icon} />
+        </div>
+        <h3 class="mt-3 font-[--font-code] text-xl font-semibold text-text-primary">{provider.name}</h3>
+        <p class="mt-2 text-base leading-relaxed text-text-secondary">{provider.description}</p>
+      </div>
+    ))}
+  </div>
+</section>

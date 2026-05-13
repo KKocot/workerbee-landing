@@ -1,0 +1,57 @@
+---
+// Code Example section - Full-width code block demonstrating chainable API
+---
+
+<section id="code" aria-labelledby="code-title" class="bg-bg-surface">
+  <div class="mx-auto max-w-[800px] px-6 py-32">
+    <div class="reveal mb-12 text-center">
+      <h2 id="code-title" class="text-h1 mb-4 font-bold tracking-tight text-text-primary" style="letter-spacing: -0.02em;">Chainable, Composable API</h2>
+      <p class="mx-auto max-w-[600px] text-lg leading-relaxed text-text-secondary">Filter events, enrich with providers, subscribe to typed data. All in a single chain.</p>
+    </div>
+
+    <figure role="region" aria-label="Code example: balance-observer.ts" class="reveal">
+      <div class="code-block">
+        <div class="code-topbar">
+          <span class="code-dot bg-[#EF4444]" aria-hidden="true"></span>
+          <span class="code-dot bg-[#FBBF24]" aria-hidden="true"></span>
+          <span class="code-dot bg-[#10B981]" aria-hidden="true"></span>
+          <span class="mx-auto font-[--font-code] text-[0.8125rem] text-text-muted">balance-observer.ts</span>
+        </div>
+        <div class="flex">
+          <div class="border-r border-border-default py-5 pl-5 pr-4 text-right font-[--font-code] text-[0.9375rem] leading-[1.7] text-text-muted select-none" aria-hidden="true"> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15</div>
+          <pre class="m-0 flex-1 overflow-x-auto px-6 py-5"><code class="font-[--font-code] text-[0.9375rem] leading-[1.7]"><span class="token-keyword">import</span> <span class="token-type">WorkerBee</span> <span class="token-keyword">from</span> <span class="token-string">"@hiveio/workerbee"</span><span class="token-punctuation">;</span>
+
+<span class="token-keyword">const</span> <span class="token-property">bot</span> <span class="token-punctuation">=</span> <span class="token-keyword">new</span> <span class="token-type">WorkerBee</span><span class="token-punctuation">();</span>
+<span class="token-keyword">await</span> <span class="token-property">bot</span><span class="token-punctuation">.</span><span class="token-function">start</span><span class="token-punctuation">();</span>
+
+<span class="token-comment">// Monitor balance changes with enriched account data</span>
+<span class="token-property">bot</span><span class="token-punctuation">.</span><span class="token-property">observe</span>
+  <span class="token-punctuation">.</span><span class="token-function">onAccountsBalanceChange</span><span class="token-punctuation">([</span><span class="token-string">"username"</span><span class="token-punctuation">])</span>
+  <span class="token-punctuation">.</span><span class="token-function">provideAccounts</span><span class="token-punctuation">(</span><span class="token-string">"username"</span><span class="token-punctuation">)</span>
+  <span class="token-punctuation">.</span><span class="token-function">subscribe</span><span class="token-punctuation">({</span>
+    <span class="token-function">next</span><span class="token-punctuation">(</span><span class="token-property">data</span><span class="token-punctuation">)</span> <span class="token-punctuation">{</span>
+      <span class="token-property">console</span><span class="token-punctuation">.</span><span class="token-function">log</span><span class="token-punctuation">(</span><span class="token-string">"Balance changed:"</span><span class="token-punctuation">,</span> <span class="token-property">data</span><span class="token-punctuation">.</span><span class="token-property">accounts</span><span class="token-punctuation">[</span><span class="token-string">"username"</span><span class="token-punctuation">]);</span>
+      <span class="token-property">console</span><span class="token-punctuation">.</span><span class="token-function">log</span><span class="token-punctuation">(</span><span class="token-string">"Block:"</span><span class="token-punctuation">,</span> <span class="token-property">data</span><span class="token-punctuation">.</span><span class="token-property">block</span><span class="token-punctuation">.</span><span class="token-property">number</span><span class="token-punctuation">);</span>
+    <span class="token-punctuation">},</span>
+    <span class="token-property">error</span><span class="token-punctuation">:</span> <span class="token-property">console</span><span class="token-punctuation">.</span><span class="token-property">error</span>
+  <span class="token-punctuation">});</span></code></pre>
+        </div>
+      </div>
+      <figcaption class="mt-6 text-center text-sm italic text-text-muted">Filter + Provider + Subscribe -- three steps to blockchain observation.</figcaption>
+    </figure>
+  </div>
+</section>

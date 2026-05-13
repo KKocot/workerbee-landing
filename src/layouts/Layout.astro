@@ -1,0 +1,77 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = "A reactive, event-driven TypeScript framework with 25 built-in filters and 7 data providers for monitoring the Hive blockchain.",
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content="WorkerBee - Reactive Blockchain Observation Framework" />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://workerbee.hive.io" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="WorkerBee - Reactive Blockchain Observation Framework" />
+    <meta name="twitter:description" content="Monitor Hive blockchain events with Observable-based TypeScript API. 25 filters, 7 providers, full type safety." />
+    <meta name="theme-color" content="#0A0A0A" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="font-[--font-display] bg-bg-primary text-text-primary antialiased">
+    <slot />
+
+    <script is:inline>
+      document.addEventListener('DOMContentLoaded', function () {
+        // Scroll reveal with IntersectionObserver
+        var observer = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+              }
+            });
+          },
+          {
+            threshold: 0.1,
+            rootMargin: '0px 0px -40px 0px',
+          }
+        );
+
+        document.querySelectorAll('.reveal').forEach(function (el) {
+          var parent = el.parentElement;
+          if (parent) {
+            var siblings = Array.from(parent.querySelectorAll(':scope > .reveal'));
+            var siblingIndex = siblings.indexOf(el);
+            if (siblingIndex > 0) {
+              el.style.transitionDelay = (siblingIndex * 40) + 'ms';
+            }
+          }
+          observer.observe(el);
+        });
+
+        // Fallback: after 500ms, force-reveal any .reveal elements still in viewport
+        setTimeout(function () {
+          document.querySelectorAll('.reveal:not(.visible)').forEach(function (el) {
+            var rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+              el.classList.add('visible');
+            }
+          });
+        }, 500);
+      });
+    </script>
+  </body>
+</html>

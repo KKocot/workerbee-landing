@@ -1,0 +1,184 @@
+---
+// Filters section - Tabbed filter showcase (25 filters across 5 categories)
+interface Filter {
+  name: string;
+  description: string;
+}
+
+interface Category {
+  id: string;
+  label: string;
+  count: number;
+  color: string;
+  filters: Filter[];
+}
+
+const categories: Category[] = [
+  {
+    id: "infrastructure",
+    label: "Infrastructure",
+    count: 3,
+    color: "#3B82F6",
+    filters: [
+      { name: "onBlock", description: "Triggers on every new block produced on the chain." },
+      { name: "onBlockNumber", description: "Triggers when a specific block number is reached." },
+      { name: "onTransactionIds", description: "Monitors specific transaction IDs on-chain." },
+    ],
+  },
+  {
+    id: "accounts",
+    label: "Accounts",
+    count: 6,
+    color: "#8B5CF6",
+    filters: [
+      { name: "onAccountsFullManabar", description: "Alerts when accounts reach full manabar capacity." },
+      { name: "onAccountsManabarPercent", description: "Triggers at a specified manabar percentage threshold." },
+      { name: "onAccountsBalanceChange", description: "Monitors balance changes on specified accounts." },
+      { name: "onAccountsMetadataChange", description: "Detects profile or JSON metadata updates." },
+      { name: "onNewAccount", description: "Triggers when new accounts are created on-chain." },
+      { name: "onImpactedAccounts", description: "Monitors all operations affecting specified accounts." },
+    ],
+  },
+  {
+    id: "financial",
+    label: "Financial",
+    count: 7,
+    color: "#F59E0B",
+    filters: [
+      { name: "onWhaleAlert", description: "Alerts on transfers exceeding a specified threshold." },
+      { name: "onExchangeTransfer", description: "Monitors transfers to/from known exchange accounts." },
+      { name: "onInternalMarketOperation", description: "Tracks HIVE/HBD internal market orders." },
+      { name: "onFeedPriceChange", description: "Triggers when witness price feed values change." },
+      { name: "onFeedPriceNoChange", description: "Alerts when price feed hasn't changed within a timeframe." },
+      { name: "onCommentsIncomingPayout", description: "Triggers before comment payout window." },
+      { name: "onAccountsBalanceChange", description: "Monitors balance changes on specified accounts." },
+    ],
+  },
+  {
+    id: "social",
+    label: "Social",
+    count: 8,
+    color: "#10B981",
+    filters: [
+      { name: "onPosts", description: "Triggers on new root posts by specified authors." },
+      { name: "onComments", description: "Triggers on new comments and replies." },
+      { name: "onVotes", description: "Monitors upvote and downvote activity." },
+      { name: "onFollow", description: "Detects follow, unfollow, and mute actions." },
+      { name: "onReblog", description: "Triggers when content is reblogged." },
+      { name: "onMention", description: "Detects @mentions in posts and comments." },
+      { name: "onPostsIncomingPayout", description: "Triggers before post payout with amount data." },
+      { name: "onCustomOperation", description: "Monitors custom_json operations by ID." },
+    ],
+  },
+  {
+    id: "security",
+    label: "Security",
+    count: 2,
+    color: "#EF4444",
+    filters: [
+      { name: "onWitnessesMissedBlocks", description: "Alerts when witnesses miss block production." },
+      { name: "onAlarm", description: "Triggers on scheduled periodic callbacks." },
+    ],
+  },
+];
+---
+
+<section id="filters" aria-labelledby="filters-title" class="mx-auto max-w-[1200px] px-6 py-32">
+  <div class="reveal mb-12 text-center">
+    <h2 id="filters-title" class="text-h1 mb-4 font-bold tracking-tight text-text-primary" style="letter-spacing: -0.02em;">25 Filters for Every Use Case</h2>
+    <p class="mx-auto max-w-[600px] text-lg leading-relaxed text-text-secondary">Event triggers organized by domain. Each filter returns typed data you can chain with providers.</p>
+  </div>
+
+  <!-- Tab bar -->
+  <div role="tablist" aria-label="Filter categories" class="reveal mb-8 flex flex-wrap justify-center gap-2" id="filter-tablist">
+    {categories.map((cat) => (
+      <button
+        role="tab"
+        aria-selected={cat.id === "infrastructure" ? "true" : "false"}
+        tabindex={cat.id === "infrastructure" ? 0 : -1}
+        aria-controls={`panel-${cat.id}`}
+        aria-label={`${cat.label}, ${cat.count} filters`}
+        class={`tab-btn tab-${cat.id}`}
+        data-tab={cat.id}
+      >
+        {cat.label}
+      </button>
+    ))}
+  </div>
+
+  <!-- Tab Panels -->
+  {categories.map((cat) => (
+    <div
+      role="tabpanel"
+      id={`panel-${cat.id}`}
+      aria-hidden={cat.id !== "infrastructure" ? "true" : "false"}
+      class:list={["grid-filters", "tab-panel", { hidden: cat.id !== "infrastructure" }]}
+      data-panel={cat.id}
+    >
+      {cat.filters.map((filter) => (
+        <div class="filter-card rounded-xl border border-border-default bg-bg-surface px-5 py-4" style={`border-left: 3px solid ${cat.color};`}>
+          <div class="flex items-center gap-2">
+            <span class="h-1.5 w-1.5 rounded-full" style={`background: ${cat.color};`} aria-hidden="true"></span>
+            <span class="font-[--font-code] text-sm font-semibold text-text-primary">{filter.name}</span>
+          </div>
+          <p class="mt-1 text-sm text-text-muted">{filter.description}</p>
+        </div>
+      ))}
+    </div>
+  ))}
+</section>
+
+<script>
+  const tablist = document.getElementById('filter-tablist')!;
+  const tabs = tablist.querySelectorAll<HTMLButtonElement>('[role="tab"]');
+  const panels = document.querySelectorAll<HTMLDivElement>('.tab-panel');
+  const tabIds = ['infrastructure', 'accounts', 'financial', 'social', 'security'];
+
+  function switchTab(tabId: string) {
+    tabs.forEach((tab) => {
+      const isActive = tab.dataset.tab === tabId;
+      tab.setAttribute('aria-selected', String(isActive));
+      tab.tabIndex = isActive ? 0 : -1;
+    });
+
+    panels.forEach((panel) => {
+      const isActive = panel.dataset.panel === tabId;
+      panel.setAttribute('aria-hidden', String(!isActive));
+      if (isActive) {
+        panel.classList.remove('hidden');
+      } else {
+        panel.classList.add('hidden');
+      }
+    });
+  }
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      switchTab(tab.dataset.tab!);
+    });
+  });
+
+  // Arrow key navigation
+  tablist.addEventListener('keydown', (e) => {
+    const currentTab = document.activeElement as HTMLButtonElement;
+    const currentId = currentTab?.dataset.tab;
+    if (!currentId) return;
+
+    const currentIndex = tabIds.indexOf(currentId);
+    let newIndex = currentIndex;
+
+    if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      newIndex = (currentIndex + 1) % tabIds.length;
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      newIndex = (currentIndex - 1 + tabIds.length) % tabIds.length;
+    }
+
+    if (newIndex !== currentIndex) {
+      switchTab(tabIds[newIndex]);
+      const newTab = tablist.querySelector(`[data-tab="${tabIds[newIndex]}"]`) as HTMLButtonElement;
+      newTab?.focus();
+    }
+  });
+</script>

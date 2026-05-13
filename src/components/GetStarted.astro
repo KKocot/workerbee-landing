@@ -1,0 +1,90 @@
+---
+// Get Started section - install command with copy button + quickstart code
+---
+
+<section id="get-started" aria-labelledby="getstarted-title" class="relative px-6 py-32">
+  <!-- Subtle amber gradient -->
+  <div aria-hidden="true" class="pointer-events-none absolute inset-0" style="background: radial-gradient(ellipse at 50% 100%, rgba(245,158,11,0.04) 0%, transparent 50%);"></div>
+
+  <div class="relative z-1 mx-auto max-w-[800px]">
+    <div class="reveal mb-12 text-center">
+      <h2 id="getstarted-title" class="text-h1 mb-4 font-bold tracking-tight text-text-primary" style="letter-spacing: -0.02em;">Start Observing in Minutes</h2>
+      <p class="mx-auto max-w-[600px] text-lg leading-relaxed text-text-secondary">Install WorkerBee and write your first observer in 5 lines of code.</p>
+    </div>
+
+    <!-- Install command -->
+    <div class="reveal mx-auto mb-8 max-w-[480px]">
+      <div class="flex items-center justify-between rounded-xl border border-border-default bg-bg-code px-6 py-4">
+        <div class="font-[--font-code] text-lg">
+          <span class="text-text-muted">$ </span>
+          <span class="text-amber-500">pnpm add @hiveio/workerbee</span>
+        </div>
+        <button
+          id="copy-btn"
+          aria-label="Copy install command"
+          class="border-none bg-transparent p-1.5 text-text-muted transition-colors duration-150 cursor-pointer"
+        >
+          <span aria-live="polite" class="sr-only" id="copy-status"></span>
+          <svg id="icon-clipboard" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          <svg id="icon-check" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="hidden"><polyline points="20 6 9 17 4 12"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Quickstart code -->
+    <figure role="region" aria-label="Code example: quickstart.ts" class="reveal">
+      <div class="code-block">
+        <div class="code-topbar">
+          <span class="code-dot bg-[#EF4444]" aria-hidden="true"></span>
+          <span class="code-dot bg-[#FBBF24]" aria-hidden="true"></span>
+          <span class="code-dot bg-[#10B981]" aria-hidden="true"></span>
+          <span class="mx-auto font-[--font-code] text-[0.8125rem] text-text-muted">quickstart.ts</span>
+        </div>
+        <pre class="m-0 overflow-x-auto px-6 py-5"><code class="font-[--font-code] text-[0.9375rem] leading-[1.7]"><span class="token-keyword">import</span> <span class="token-type">WorkerBee</span> <span class="token-keyword">from</span> <span class="token-string">"@hiveio/workerbee"</span><span class="token-punctuation">;</span>
+
+<span class="token-keyword">const</span> <span class="token-property">bot</span> <span class="token-punctuation">=</span> <span class="token-keyword">new</span> <span class="token-type">WorkerBee</span><span class="token-punctuation">();</span>
+<span class="token-keyword">await</span> <span class="token-property">bot</span><span class="token-punctuation">.</span><span class="token-function">start</span><span class="token-punctuation">();</span>
+
+<span class="token-property">bot</span><span class="token-punctuation">.</span><span class="token-property">observe</span><span class="token-punctuation">.</span><span class="token-function">onBlock</span><span class="token-punctuation">().</span><span class="token-function">subscribe</span><span class="token-punctuation">({</span>
+  <span class="token-function">next</span><span class="token-punctuation">:</span> <span class="token-punctuation">(</span><span class="token-property">data</span><span class="token-punctuation">)</span> <span class="token-keyword">=&gt;</span> <span class="token-property">console</span><span class="token-punctuation">.</span><span class="token-function">log</span><span class="token-punctuation">(</span><span class="token-string">"Block:"</span><span class="token-punctuation">,</span> <span class="token-property">data</span><span class="token-punctuation">.</span><span class="token-property">block</span><span class="token-punctuation">.</span><span class="token-property">number</span><span class="token-punctuation">),</span>
+  <span class="token-property">error</span><span class="token-punctuation">:</span> <span class="token-property">console</span><span class="token-punctuation">.</span><span class="token-property">error</span>
+<span class="token-punctuation">});</span></code></pre>
+      </div>
+      <figcaption class="sr-only">Quickstart code showing how to observe new blocks on the Hive blockchain.</figcaption>
+    </figure>
+
+    <!-- CTAs -->
+    <div class="reveal mt-10 flex flex-wrap justify-center gap-4">
+      <a href="https://github.com/openhive-network/workerbee#readme" target="_blank" rel="noopener noreferrer" class="btn-primary">Read the Docs</a>
+      <a href="https://github.com/openhive-network/workerbee" target="_blank" rel="noopener noreferrer" class="btn-outline">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+        View Examples on GitHub
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  const copyBtn = document.getElementById('copy-btn')!;
+  const iconClipboard = document.getElementById('icon-clipboard')!;
+  const iconCheck = document.getElementById('icon-check')!;
+  const copyStatus = document.getElementById('copy-status')!;
+
+  copyBtn.addEventListener('click', async () => {
+    await navigator.clipboard.writeText('pnpm add @hiveio/workerbee');
+
+    iconClipboard.classList.add('hidden');
+    iconCheck.classList.remove('hidden');
+    copyBtn.style.color = '#10B981';
+    copyBtn.setAttribute('aria-label', 'Copied!');
+    copyStatus.textContent = 'Command copied to clipboard';
+
+    setTimeout(() => {
+      iconClipboard.classList.remove('hidden');
+      iconCheck.classList.add('hidden');
+      copyBtn.style.color = '';
+      copyBtn.setAttribute('aria-label', 'Copy install command');
+      copyStatus.textContent = '';
+    }, 2000);
+  });
+</script>

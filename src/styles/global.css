@@ -8,6 +8,7 @@
   --color-bg-surface: #111111;
   --color-bg-elevated: #1A1A1A;
   --color-bg-code: #0D0D0D;
+  --color-amber-400: #FBBF24;
   --color-amber-500: #F59E0B;
   --color-amber-600: #D97706;
   --color-amber-glow: rgba(245, 158, 11, 0.15);
@@ -127,145 +128,6 @@ body {
 @keyframes honeycomb-pulse {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.05); }
-}
-
-/* ===== CARDS ===== */
-.card-hover {
-  transition: transform 200ms ease-out, box-shadow 200ms ease-out, border-color 200ms ease-out;
-}
-.card-hover:hover {
-  transform: scale(1.02);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6), 0 0 12px var(--color-amber-glow);
-  border-color: var(--color-border-hover);
-}
-
-/* ===== FILTER CARDS ===== */
-.filter-card {
-  transition: border-left-width 200ms ease-out, background-color 200ms ease-out;
-}
-.filter-card:hover {
-  border-left-width: 4px;
-  background-color: var(--color-bg-elevated);
-}
-
-/* ===== BUTTONS ===== */
-.btn-primary {
-  background: var(--color-amber-500);
-  color: #0A0A0A;
-  font-weight: 600;
-  padding: 0.75rem 2rem;
-  border-radius: 0.5rem;
-  transition: background 150ms ease-out, box-shadow 150ms ease-out;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  text-decoration: none;
-}
-.btn-primary:hover {
-  background: var(--color-amber-600);
-  box-shadow: 0 0 24px var(--color-amber-glow), 0 0 48px rgba(245, 158, 11, 0.05);
-}
-
-.btn-outline {
-  border: 1px solid var(--color-amber-border);
-  color: var(--color-amber-500);
-  font-weight: 600;
-  padding: 0.75rem 2rem;
-  border-radius: 0.5rem;
-  transition: background 150ms ease-out, border-color 150ms ease-out;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  text-decoration: none;
-  background: transparent;
-}
-.btn-outline:hover {
-  background: var(--color-amber-muted);
-  border-color: var(--color-amber-500);
-}
-
-/* ===== CODE BLOCKS ===== */
-.code-block {
-  background: var(--color-bg-code);
-  border: 1px solid var(--color-amber-border);
-  border-radius: 1.5rem;
-  box-shadow: inset 0 1px 0 rgba(245, 158, 11, 0.1), 0 0 0 1px rgba(245, 158, 11, 0.12);
-  overflow: hidden;
-}
-.code-topbar {
-  display: flex;
-  align-items: center;
-  padding: 0.75rem 1.5rem;
-  border-bottom: 1px solid var(--color-border-default);
-  gap: 0.5rem;
-}
-.code-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-}
-
-/* ===== TAB STYLES ===== */
-.tab-btn {
-  padding: 0.5rem 1rem;
-  border-radius: 9999px;
-  font-size: 0.875rem;
-  font-weight: 500;
-  transition: all 250ms ease-in-out;
-  border: 1px solid transparent;
-  white-space: nowrap;
-  cursor: pointer;
-  background: transparent;
-  color: var(--color-text-muted);
-}
-.tab-btn[aria-selected="true"] {
-  border-color: currentColor;
-}
-.tab-btn.tab-infrastructure[aria-selected="true"] {
-  background: rgba(59, 130, 246, 0.1);
-  color: #3B82F6;
-  border-color: rgba(59, 130, 246, 0.2);
-}
-.tab-btn.tab-accounts[aria-selected="true"] {
-  background: rgba(139, 92, 246, 0.1);
-  color: #8B5CF6;
-  border-color: rgba(139, 92, 246, 0.2);
-}
-.tab-btn.tab-financial[aria-selected="true"] {
-  background: rgba(245, 158, 11, 0.1);
-  color: #F59E0B;
-  border-color: rgba(245, 158, 11, 0.2);
-}
-.tab-btn.tab-social[aria-selected="true"] {
-  background: rgba(16, 185, 129, 0.1);
-  color: #10B981;
-  border-color: rgba(16, 185, 129, 0.2);
-}
-.tab-btn.tab-security[aria-selected="true"] {
-  background: rgba(239, 68, 68, 0.1);
-  color: #EF4444;
-  border-color: rgba(239, 68, 68, 0.2);
-}
-
-/* ===== ECOSYSTEM CONNECTORS ===== */
-@media (min-width: 768px) {
-  .eco-card:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    right: -1.5rem;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 3rem;
-    height: 1px;
-    border-top: 1px dashed var(--color-amber-border);
-    opacity: 0.3;
-  }
-}
-
-/* ===== TAB PANEL VISIBILITY ===== */
-.tab-panel.hidden {
-  display: none;
-}
 
 /* ===== RESPONSIVE GRIDS ===== */
 .hero-grid {
@@ -338,9 +200,18 @@ body {
   }
   .honeycomb-layer-1,
   .honeycomb-layer-2,
-  .honeycomb-layer-3 {
+  .honeycomb-layer-3,
+  .bee-icon,
+  .bee-wing-left,
+  .bee-wing-right,
+  .hero-bee__float,
+  .hero-bee__wing--front,
+  .hero-bee__wing--back {
     will-change: auto;
     animation: none;
+  }
+  .hero-bee__drift {
+    transition: none;
   }
   .reveal {
     opacity: 1;
